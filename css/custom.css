@@ -1,0 +1,21 @@
+.button{
+    margin: 5em;
+}
+.btn{
+    border: 1px solid #fff;
+    box-shadow: 0 0 4px #000;
+    border-radius: 8px;
+    padding: 25px 10px;
+    display: inline-block;
+}
+.btn span{
+    box-shadow: 0 0 4px #000;
+    width: 9em;
+    font-size: 25px;
+    font-weight: bold;
+    text-align: center;
+    color: #6C6C75;
+    text-transform: uppercase;
+    padding: 17px;
+    background: -webkit-gradient(linear, 10% 69%, 10% 29%, from(#C1C4BF), to(#E9E6E4));
+}

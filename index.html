@@ -1,0 +1,682 @@
+<html>
+<head>
+    
+<link rel="stylesheet" type="text/css" href="css/semantic.css"> 
+<script src="../javascript/jquery.min.js"></script>
+
+    
+<style>
+    
+*{
+    margin:0;
+    padding:0;
+}
+    
+#mycanvas{
+    position: fixed;
+    background-color: #eee;
+    /*
+    margin-left:calc(50% - 250px);
+    margin-top:1em;
+    */
+    box-shadow: 0 0 4px 2px;
+    cursor:default;
+}
+.middle-text{
+    width:100%;
+    text-align: center;
+    margin-bottom: 2em;
+}
+.text{
+    text-align: center;
+    width: 200px;
+}
+.stats{
+    position: absolute;
+    top: 2em;
+    left:2em;
+    color:#22313F;
+    display:none;
+}
+.buttonstat{
+    width:100%;
+    text-align: center;
+}
+
+.leaderboard-btn{
+    margin-top:0em;
+}   
+.water{
+    position: fixed;
+    bottom:0px;
+    width:100%;
+    z-index: 5;
+}
+.scoremul{
+    color:#F64747;
+}
+.end.ui.button{
+    position: fixed;
+    right:2em;
+    top:2em;
+    display:none;
+}
+.ui.animated.button{
+    padding: 20px 40px !important;
+}
+.redoverlay{
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-color: rgba(217, 30, 24,0.5);
+    display: none;
+    z-index: 4;
+}
+.bonus{
+    position: fixed;
+    color:#26A65B;
+    font-size: 30px;
+    opacity: 1;
+    display:none;
+}
+.loss{
+    position: absolute;
+    color:red;
+    font-size: 30px;
+    left:2em;
+    display:none;
+}
+.title{
+    position: relative;
+    z-index: 23;
+    color:#22313F;
+    font-size: 50px;
+    text-align: center;
+    width:100%;
+    margin-bottom: 1em;
+    padding-top: 1.5em;
+}
+.title small{
+    font-size: 30px;
+}
+    
+.leaderboard-cont{
+    width: 20%;
+    right: -500px;
+    position: fixed;
+    min-height: 400px;
+    padding: 10px 30px 10px 25px;
+
+    background-color: rgba(34, 49, 63,0.9);
+    color: #fff;
+    border-radius: 5px;
+    
+}
+.leaderboard-cont a{
+    color:#eee;
+    text-decoration: none;
+}
+.leaderboard-cont a:hover{
+    text-decoration: underline;
+}
+.leaderboard-cont .person{
+    padding:6px 10px;
+}
+.leaderboard-cont .pscore{
+    float:right;
+}
+.leaderboard-cont .serial{
+    padding:0 5px;
+}
+.heading-l{
+    text-align: center;
+    padding:10px;
+    font-size: 30px;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 15px;
+}
+
+ 
+</style>
+
+<title>Bouncing Balls</title>    
+</head>
+<body>
+    
+    <canvas id="mycanvas" width="500" height="300">
+        You are an Asshole. Canvas dont work in your Browser.
+    </canvas> 
+    
+    
+
+    <div class="buttonstat">
+        
+        <div class="title">
+            <span>Bouncing Balls</span><br>
+            <small></small>
+        </div>
+        
+        <div class="middle-text">
+            <div class="ui vertical buttons text">
+                <div class="easy ui animated fade button green large">
+                    <div class="visible content">Beginner</div>
+                    <div class="hidden content">Play now</div>
+                </div>
+                <div class="expert ui animated fade button red large">
+                    <div class="visible content">Expert</div>
+                    <div class="hidden content">Play now</div>
+                </div>
+                <div class="insane ui animated fade button teal large">
+                    <div class="visible content">Insane</div>
+                    <div class="hidden content">Play now</div>
+                </div>
+            </div>
+        </div>
+        
+        <div>
+            <div class="leaderboard-btn ui animated fade button black large">
+                <div class="visible content">Leaderboard</div>
+                <div class="hidden content">Click and Hold</div>
+            </div>
+        </div>
+        
+        
+    </div>
+    
+    <div class="ui button red end">End Game</div>
+    
+    <div class="leaderboard-cont">
+        
+        <div class="heading-l">Champions</div>
+        
+        <div class="person">
+            <span class="serial">1.</span>
+            <span class="name"><a href="http://www.facebook.com/tanuj304" target="_blank">Vishnu KS</a></span>
+            <span class="pscore">2523678</span>
+        </div>
+        <div class="person">
+            <span class="serial">2.</span>
+            <span class="name"><a href="http://www.facebook.com/tanuj304" target="_blank">Julia Eng</a></span>
+            <span class="pscore">1863275</span>
+        </div>
+        <div class="person">
+            <span class="serial">3.</span>
+            <span class="name"><a href="http://www.facebook.com/tanuj304" target="_blank">Jack Korbin</a></span>
+            <span class="pscore">1632456</span>
+        </div>
+        <div class="person">
+            <span class="serial">4.</span>
+            <span class="name"><a href="http://www.facebook.com/tanuj304" target="_blank">Lavesh Kaushik</a></span>
+            <span class="pscore">1615674</span>
+        </div>
+        <div class="person">
+            <span class="serial">5.</span>
+            <span class="name"><a href="http://www.facebook.com/tanuj304" target="_blank">SP harish</a></span>
+            <span class="pscore">1216546</span>
+        </div>
+        <div class="person">
+            <span class="serial">6.</span>
+            <span class="name"><a href="http://www.facebook.com/tanuj304" target="_blank">Emme Watson</a></span>
+            <span class="pscore">1156892</span>
+        </div>
+        <div class="person">
+            <span class="serial">7.</span>
+            <span class="name"><a href="http://www.facebook.com/tanuj304" target="_blank">Shubham Nanda</a></span>
+            <span class="pscore">1045942</span>
+        </div>
+        <div class="person">
+            <span class="serial">8.</span>
+            <span class="name"><a href="http://www.facebook.com/tanuj304" target="_blank">Anurag El Dorado</a></span>
+            <span class="pscore">1045369</span>
+        </div>
+        
+        
+    </div>
+    
+    <div class="stats">
+        Life : <span class="gone">500</span>/500<br>
+        Score : <span class="score">0</span> x <span class="scoremul">1</span><br>
+        Max score : <span class="mscore">0</span> 
+    </div>
+    
+    <div class="water">
+        <img src="w.png" width="100%" class="w">
+    </div>
+    
+    <div class="redoverlay"></div>
+    
+    <div class="bonus">+<span>0</span></div>
+    
+    <div class="loss">-<span>0</span></div>
+    
+<script>
+    
+    // GENRAL Script --> 
+    
+    $('.leaderboard-cont').css('top',window.innerHeight/2 - $('.leaderboard-cont').innerHeight()/2  );
+    
+    $('.leaderboard-btn').mousedown(function(){
+        $('.leaderboard-cont').animate({'right':'-5'},200);
+    });
+    $('body').mouseup(function(){
+        //$('.leaderboard-cont').fadeOut(200);
+        $('.leaderboard-cont').animate({'right':'-500'},200);
+    });
+    
+    /**** GAME ****/
+    
+    /******Variables and INITIALITAION ******/
+    
+    var gamestart = 0;
+    var lives = 500; // Starting Lives
+    var gone = lives; // Remaining Lives
+    
+    var scorefactor = 26;
+    var scoremultiplier = 1;
+    var scoremultiplierfactor = 2;
+    
+    var score = 0;
+    var mscore = score;
+    var currentscore = 0;
+    var currentloss = 0;
+    
+    var flaketime = 500;
+    var speedfactor = 1;
+    
+    $('.score').html(score);
+    $('.gone').html(lives);
+    
+    var mx;
+    var my; // Position of mouse!
+    
+    var w;
+    var h; // Height and width of canvas;
+    
+    
+    var widthpdefault = 200; // Starting/Default width
+    var widthp = widthpdefault; // Variabe width
+    var widthpfactor = 15; // Factor by which the width is incremented
+    var maxwidthp = 350;
+    var heightp = 50; // Width and height of plates.
+    var abovep; // How high will be the plate
+    
+    //var color_balls = "#eee";
+    var color_balls =  ['#D91E18','#F62459','#674172','#1F3A93','#26A65B','#F89406','#22313F','#049372','#D35400'];
+    
+    var color_bg = ['#6BB9F0','#ddd'];
+    var color_boat = "#96281B";
+    
+    var flakearr = []; // Array of lakes
+    var maxflakes = 500;// Max possible flakes
+    
+    var flakeinterval; // Timeout To animate 
+    
+    var canvas = document.getElementById('mycanvas'); // Main canvas
+    var ctx = canvas.getContext('2d'); // Its context
+    
+    var tempcanvas = document.createElement('canvas'); // Temporary canvas
+    var tempctx = tempcanvas.getContext('2d'); // Its context
+    
+    responsiveness();
+    console.log(abovep);
+    tempctx.canvas.width = w;
+    tempctx.canvas.height = h;
+    
+    ctx.fillStyle=color_bg;
+    ctx.fillRect(0,0,ctx.canvas.width,ctx.canvas.height);
+    
+    setTimeout(function(){
+        $('.bonus').css('top',h - abovep - 50);
+        $('.loss').css('top',h - abovep - 50);
+    },500);
+    
+    
+    
+    /************/
+    
+    
+    $('.easy').click(function(){ // Beginner
+        flaketime = 2500;
+        speedfactor = 2;
+        scorefactor = 3;
+        scoremultiplierfactor = 2;
+        startgame();
+    });
+    $('.expert').click(function(){ //Expert
+        flaketime = 1000;
+        speedfactor = 4;
+        scorefactor = 5;
+        scoremultiplierfactor = 2;
+        startgame();
+    });
+    $('.insane').click(function(){ // Insane
+        flaketime = 400;
+        speedfactor = 6;
+        scorefactor = 10;
+        scoremultiplierfactor = 4;
+        startgame();
+    });
+    
+    $('.end').click(function(){ // Insane
+        
+        resetgame();
+    });
+    
+    $('body').mousemove(function(e) {
+        //var pos = findPos(this);
+       
+        mx = e.pageX;
+        my = e.pageY;
+            //var coordinateDisplay = "x=" + mx + ", y=" + my;
+            //console.log(coordinateDisplay);
+            //checkcollapse(mx,my);
+        
+        
+    });
+    
+    mainstartsettings();
+    
+    function mainstartsettings(){
+        startaddflake();
+        startanimate();
+    }
+    
+    
+    //$(window).resize(responsiveness);
+    function responsiveness(){
+        
+        ctx.canvas.width = window.innerWidth;
+        ctx.canvas.height = window.innerHeight;
+        w = ctx.canvas.width;
+        h = ctx.canvas.height;
+        
+        $(".w").one("load", function() {
+            $('.water').css('width',w);
+            abovep = $('.water').innerHeight();
+        }).each(function() {
+          if(this.complete) $(this).load();
+        });
+        
+        
+    }
+    
+    
+    function startgame(){
+        //$('#mycanvas').css('cursor','none');
+        $('.title').fadeOut();
+        $('.middle-text').fadeOut();
+        $('.leaderboard-btn').fadeOut();
+        $('.stats').fadeIn();
+        $('.end').fadeIn();
+        flakearr = [];
+        draw();
+        clearTimeout(flakeinterval);
+        clearTimeout(addflaketimer);
+        score = 0;
+        gone = lives;
+        gamestart = 1;
+        animate();
+        addflake();
+        update();
+    }
+    
+    
+    
+    
+    
+    function flake(){
+        this.x = Math.floor( Math.random() * w );
+        this.y = -5;
+        this.drift = (Math.random() * 6 ) - 3 ; // 1,2,3
+        this.speed = Math.floor( Math.random() * speedfactor ) + 5; // 1,2,3,4
+        this.radius = Math.floor( Math.random() * 35 ) + 5; // 1,2,3,4,5,6
+        this.width = Math.floor( Math.random() * 2 ) + 1;
+        this.height = this.width;
+        var j = Math.floor( Math.random() * color_balls.length );
+        this.color = color_balls[j];
+    }
+    
+    
+    
+    function animate(){
+        blank();
+        for(var i=0; i < flakearr.length; i++ ){
+            
+            var r = flakearr[i].radius;
+            flakearr[i].x +=  flakearr[i].drift;
+            flakearr[i].y +=  flakearr[i].speed;
+        
+            if( flakearr[i].x + flakearr[i].radius  > w || flakearr[i].x - flakearr[i].radius < 0 ){
+                flakearr[i].drift = 0-flakearr[i].drift; // 0,1,2
+            }
+            if( flakearr[i].y < -5 ){
+                flakearr[i].speed = -flakearr[i].speed; // 1,2,3,4
+            }
+            if( flakearr[i].y + r  >= h - abovep  ){
+                check();
+                if( mx - widthp/2 - r < flakearr[i].x && mx + widthp/2 + r > flakearr[i].x ){
+                    
+                    flakearr[i].speed = -flakearr[i].speed;
+                    
+                    // Drifting Algorithm --> 
+                    
+                    if( flakearr[i].x < mx - 4*widthp/10 ){
+                        flakearr[i].drift = Math.abs(flakearr[i].drift) * -1; // Leftmost Collision
+                    }
+                    else if ( flakearr[i].x < mx - 2*widthp/10 ){
+                        flakearr[i].drift = Math.abs(flakearr[i].drift) * -1; // Leftmiddle
+                    }
+                    else if ( mx-2*widthp/10 < flakearr[i].x && flakearr[i].x < mx+2*widthp/10 ){ // Middle part
+                        
+                    }
+                    else if ( flakearr[i].x > mx + 2*widthp/10 && flakearr[i].x < mx + 4*widthp/10 ){ // Rightmiddle
+                        flakearr[i].drift = Math.abs(flakearr[i].drift) * 1;
+                    }
+                    else{ // Rightmost Collision
+                        flakearr[i].drift = Math.abs(flakearr[i].drift) * 1;
+                    }
+                    //*******/////
+                    
+                    abovep-=5;
+                    setTimeout(function(){
+                        abovep+=5;
+                    },100);
+                    
+                    if( widthp < maxwidthp  ){
+                        widthp += widthpfactor;
+                    }
+                    
+                    //Here!
+                    currentscore = flakearr[i].radius * scorefactor * scoremultiplier;
+                    
+                    score += currentscore;
+                    $('.score').not(':animated').slideUp(200);
+                    setTimeout(update,300);
+                    $('.score').slideDown(200);
+                    
+                    
+                    if( scoremultiplier < 200 ){
+                        $('.scoremul').not(':animated').slideUp(200);
+                        scoremultiplier = scoremultiplier * scoremultiplierfactor;
+                        $('.scoremul').slideDown(200);
+                    }
+                    
+                    
+                }
+                else{
+                    //console.log('else');
+                    if( flakearr.length > 0 ){
+                        flakearr.splice(i, 1);
+                    }
+                    currentloss = r;
+                    gone -= currentloss;
+                    scoremultiplier = 1;
+                    widthp = widthpdefault;
+                    update();
+                    $(".redoverlay").fadeIn(50).fadeOut(50);
+                }
+                
+            }
+            
+        }
+        draw();
+        flakeinterval = setTimeout(animate,20);
+    }
+    
+    function check(){
+        if( gone < 0 ){
+            resetgame();
+        }
+    }
+    
+    function update(){
+        $('.score').html(score);
+        if( gone > 0 ){
+            $('.gone').html(gone);
+        }
+        else {
+           $('.gone').html(0);
+        }
+        if( currentscore != $('.bonus span').html() ){
+            $('.bonus span').html(currentscore);
+            bonusanim();
+        }
+        if( currentloss != $('.loss span').html() ){
+            $('.loss span').html(currentloss);
+            lossanim();
+        }
+        
+        
+        $('.scoremul').html(scoremultiplier);
+        if( mscore < score ){
+            mscore = score;
+            $('.mscore').html(mscore);
+        }
+        
+    }
+    function bonusanim(){
+        $('.bonus').not(':animated').fadeIn(100).fadeOut(500);
+    }
+    function lossanim(){
+        $('.loss').not(':animated').fadeIn(100).fadeOut(500);
+    }
+    
+    function resetgame(){
+        $('.title').fadeIn(200);
+        $('.title span').html('Gameover');
+        $('.title small').html('Score : '+score);
+        flakearr = [];
+        draw();
+        clearTimeout(flakeinterval);
+        clearTimeout(addflaketimer);
+        $('#mycanvas').css('cursor','default');
+        $('.end').fadeOut(200);
+        $('.middle-text').fadeIn();
+        $('.leaderboard-btn').fadeIn();
+        gamestart = 0;
+        
+        widthp = widthpdefault;
+    }
+    
+    function draw(i){
+        
+        $('.bonus').css('left',mx-75);
+        
+        for(var i=0; i < flakearr.length; i++ ){
+            ctx.save();            
+            tempctx.fillStyle=flakearr[i].color;
+            tempctx.beginPath();
+            //ctx.fillRect(flakearr[i].x,flakearr[i].y,flakearr[i].width,flakearr[i].height);
+            tempctx.arc(flakearr[i].x,flakearr[i].y,flakearr[i].radius,0,6,false);
+            tempctx.fill();
+
+            ctx.drawImage(tempcanvas,0,0,w,h);
+
+            ctx.restore();
+        }
+    }
+    
+    function blank(){
+        
+        tempctx.save();
+        
+        var gra = tempctx.createLinearGradient(w/2,0,w/2,h);
+        gra.addColorStop(0,color_bg[0]);
+        gra.addColorStop(0.4,color_bg[1]);
+        
+        tempctx.fillStyle=gra;
+        tempctx.fillRect(0,0,ctx.canvas.width,ctx.canvas.height);
+        
+        
+        
+        tempctx.fillStyle = color_boat;
+        
+        tempctx.beginPath();
+        tempctx.moveTo(mx-widthp/2,h - abovep);
+        tempctx.lineTo(mx+widthp/2,h - abovep);
+        tempctx.lineTo(mx+widthp/4,h - abovep + heightp);
+        tempctx.lineTo(mx-widthp/4,h - abovep + heightp);
+        tempctx.closePath();
+        
+        //tempctx.fillRect(mx-100,600,200,20);
+        tempctx.fill();
+        tempctx.restore();
+    }
+    
+    
+    var addflaketimer;
+    function addflake(){
+        if( flakearr.length < 6 ){
+            flakearr[flakearr.length] = new flake();
+        }
+        
+        addflaketimer = setTimeout(addflake,flaketime);
+        if( flakearr.length > maxflakes ){
+            //alert(flakearr.length);
+            clearTimeout(addflaketimer);
+        }
+    }
+    
+    // STARTING FUCTIONS/ INITIALISING / BEFORE GAME START -->
+    
+    function startaddflake(){
+        flakearr[flakearr.length] = new flake();
+        
+        addflaketimer = setTimeout(startaddflake,200);
+        if( flakearr.length > maxflakes ){
+            //alert(flakearr.length);
+            clearTimeout(addflaketimer);
+        }
+    }
+    function startanimate(){
+        blank();
+        for(var i=0; i < flakearr.length; i++ ){
+            
+            flakearr[i].x +=  flakearr[i].drift;
+            flakearr[i].y +=  flakearr[i].speed;
+        
+            if( flakearr[i].x + flakearr[i].radius  > w || flakearr[i].x - flakearr[i].radius < 0 ){
+                flakearr[i].drift = 0-flakearr[i].drift; // 0,1,2
+            }
+            if( flakearr[i].y < -5 ){
+                flakearr[i].speed = -flakearr[i].speed; // 1,2,3,4
+            }
+            if( flakearr[i].y + flakearr[i].radius  >= h   ){
+                    flakearr.splice(i, 1);
+            }
+            
+        }
+        draw();
+        flakeinterval = setTimeout(startanimate,20);
+    }
+    
+    
+    
+    
+</script>
+    
+    
+</body>
+</html>
